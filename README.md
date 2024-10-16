@@ -12,6 +12,8 @@
 
 6. Criar Users & Roles(users feitos)
 
-7. Criar Views & Procedimentos(um dos vies feito)
+7. Criar Views & Procedimentos(um dos views feito)
 
-8. Criar Funções(CRUD?)
+8. Criar Funções(funções feitas)
+
+9. Back-end em Go ---CRUD e linkar com as funções 
