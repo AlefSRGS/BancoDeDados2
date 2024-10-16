@@ -1,7 +1,5 @@
 CREATE DATABASE restaurante;
 
-\c restaurante; -- Conecta ao banco de dados criado
-
 CREATE TABLE cliente (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100),
