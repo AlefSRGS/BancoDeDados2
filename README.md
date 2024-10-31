@@ -40,6 +40,7 @@ Contém a lógica interna do aplicativo, incluindo a definição de modelos, int
 Contém pacotes que podem ser reutilizados em diferentes partes do projeto ou em outros projetos.
 
 - **`utils/`**: Funções utilitárias que podem ser utilizadas em todo o projeto para evitar duplicação de código.
+    - Ex: HashPassword(): para hashar senhas antes de armazenar no banco.
 
 ### `migrations/`
 Contém scripts SQL para migrações de banco de dados, permitindo a criação e modificação de tabelas conforme necessário.
