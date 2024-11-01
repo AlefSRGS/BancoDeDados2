@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <h1>Welcome to My Web App</h1>
     <p>This is a simple web application built with SQL and Golang.</p>
 
-    <form action="/submit" method="post">
+    <form id="data-form"> <!-- Form para enviar dados -->
         <label for="name">Name:</label>
         <input type="text" id="name" name="name"><br><br>
         <label for="email">Email:</label>
@@ -18,9 +18,10 @@
         <input type="submit" value="Submit">
     </form>
 
-    <div id="data-container">
+    <div id="data-container"> <!-- Container para mostrar os dados do banco -->
         <h2>Database Data</h2>
-        </div>
+        <div id="data-output"></div>
+    </div>
 
     <script src="script.js"></script>
 </body>
