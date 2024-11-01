@@ -9,8 +9,8 @@ var (
 	logger *Logger
 )
 
-func Init() (*gorm.DB ,error) {
-	db, err := InitializePostgresql()
+func DBConnection() (*gorm.DB ,error) {
+	db, err := ConnectPostgresql()
 	if err != nil {
         return nil, err
     }

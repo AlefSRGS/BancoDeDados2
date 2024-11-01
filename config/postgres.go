@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func InitializePostgresql() (*gorm.DB, error) {
+func ConnectPostgresql() (*gorm.DB, error) {
 	logger := GetLogger(("postgresql"))
 	host := os.Getenv("DB_HOST")
 	user := os.Getenv("DB_USER")
@@ -34,5 +34,31 @@ func InitializePostgresql() (*gorm.DB, error) {
         logger.Errorf("postgresql migration error: %v", err)
         return nil, err
     }
+
+
+
 	return db, nil
+}
+
+func initDatabase(db *gorm.DB) error {
+
+    sqlFile, err := os.Open("Restaurante.sql")
+    if err != nil {
+        logger.Errorf("Error opening SQL file for init database: %v", err)
+		return err
+    }
+    defer sqlFile.Close()
+
+    sqlBytes, err := os.ReadFile(sqlFile)
+    if err != nil {
+        return err
+    }
+
+    // Executa o SQL lido
+    sqlStatements := string(sqlBytes)
+    _, err = db.Exec(sqlStatements)
+    if err != nil {
+        return err
+    }
+    return nil
 }

@@ -47,9 +47,3 @@ Contém scripts SQL para migrações de banco de dados, permitindo a criação e
 
 ### `test/`
 Contém testes unitários para verificar a funcionalidade dos componentes do sistema.
-
-## Como Executar o Projeto
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seuusuario/mycrud.git

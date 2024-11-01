@@ -1,5 +1,14 @@
 services:
-  db:
+  crud_app:
+    container_name: crud_app
+    image: "crud_app:latest"
+    build: .
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - ${DB_HOST}
+
+  postgres_db:
     image: postgres:13
     container_name: ${DB_HOST}
     environment:
@@ -7,7 +16,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}" 
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
