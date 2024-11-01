@@ -1,5 +1,3 @@
-// internal/model/venda.go
-
 package model
 
 import (
@@ -9,6 +7,7 @@ import (
 )
 
 type Venda struct {
+    gorm.Model
     ID         uint   `gorm:"primaryKey" json:"id"`
     IDCliente  uint   `gorm:"index" json:"id_cliente"`
     IDPrato    uint   `gorm:"index" json:"id_prato"`

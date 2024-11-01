@@ -7,6 +7,7 @@ import (
 )
 
 type Ingrediente struct {
+    gorm.Model
     ID             uint   `gorm:"primaryKey" json:"id"`
     Nome           string `json:"nome"`
     DataFabricacao time.Time `json:"data_fabricacao"` 

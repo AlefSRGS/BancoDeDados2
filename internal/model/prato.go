@@ -3,6 +3,7 @@ package model
 import "gorm.io/gorm"
 
 type Prato struct {
+    gorm.Model
     ID            uint    `gorm:"primaryKey" json:"id"`
     Nome          string  `json:"nome"`
     Descricao     string  `json:"descricao"`

@@ -1,5 +1,3 @@
-// internal/model/cliente.go
-
 package model
 
 import (
@@ -9,6 +7,7 @@ import (
 )
 
 type Cliente struct {
+    gorm.Model
     ID         uint   `gorm:"primaryKey" json:"id"`
     Nome       string `json:"nome"`
     Sexo       string `gorm:"type:char(1);check:sexo IN ('m', 'f', 'o')" json:"sexo"`
