@@ -9,8 +9,12 @@ var (
 	logger *Logger
 )
 
-func Init() error {
-	return nil
+func Init() (*gorm.DB ,error) {
+	db, err := InitializePostgresql()
+	if err != nil {
+        return nil, err
+    }
+	return db, nil
 }
 
 func GetLogger(p string) *Logger {
