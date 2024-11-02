@@ -9,15 +9,21 @@ var (
 	logger *Logger
 )
 
-func DBConnection() (*gorm.DB ,error) {
-	db, err := ConnectPostgresql()
+func DBConnection() error {
+	var err error
+	db, err = ConnectPostgresql()
 	if err != nil {
-        return nil, err
+		logger.Errorf("config initialization error: %v", err)
+        return err
     }
-	return db, nil
+	return nil
 }
 
 func GetLogger(p string) *Logger {
 	logger = NewLogger(p)
 	return logger
+}
+
+func GetDbConnection() *gorm.DB {
+	return db
 }

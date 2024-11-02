@@ -11,12 +11,12 @@ var(
 
 func main() {
 	logger = *config.GetLogger("main")
-	
-	db, err := config.DBConnection()
+
+	err := config.DBConnection()
 	if err != nil {
-		logger.Errorf("config initialization error: %v", err)
+        logger.Errorf("Error connecting to database: %v", err)
 		return
-	}
+    }
 
 	router.Inicialize()
 }

@@ -21,7 +21,13 @@ func ConnectPostgresql() (*gorm.DB, error) {
 
 	if host == "" || port == "" || user == "" || password == "" || dbname == "" {
 		errDotEnv :=  errors.New("Missing environment variables for database connection")
-        logger.Errorf("postgresql connection error: %v", errDotEnv)
+        logger.Warnf("postgresql connection warning: %v", errDotEnv)
+        logger.Info("Initializing default database connection...")
+        host = "localhost"
+        port = "5432"
+        user = "postgres"
+        password = "postgres"
+        dbname = "restaurante"
 		return nil, errDotEnv
     }
 	dsn := "host=" + host + " port=" + port + " user=" + user + " password=" + password + " dbname=" + dbname + " sslmode=disable"
