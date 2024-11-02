@@ -2,7 +2,9 @@ package config
 
 import (
 	"errors"
+	"io"
 	"os"
+	"strings"
 
 	"github.com/vinicius457/BancoDeDados2/internal/model"
 	"gorm.io/driver/postgres"
@@ -35,7 +37,11 @@ func ConnectPostgresql() (*gorm.DB, error) {
         return nil, err
     }
 
-
+    err = initDatabase(db)
+    if err!= nil {
+        logger.Errorf("Error initializing database: %v", err)
+        return nil, err
+    }
 
 	return db, nil
 }
@@ -49,16 +55,24 @@ func initDatabase(db *gorm.DB) error {
     }
     defer sqlFile.Close()
 
-    sqlBytes, err := os.ReadFile(sqlFile)
+    sqlBytes, err := io.ReadAll(sqlFile)
     if err != nil {
+        logger.Errorf("Error reading SQL file for init database: %v", err)
         return err
     }
 
-    // Executa o SQL lido
-    sqlStatements := string(sqlBytes)
-    _, err = db.Exec(sqlStatements)
-    if err != nil {
-        return err
+    // Separa os comandos SQL
+    commands := strings.Split(string(sqlBytes), ";")
+
+    for line := 0; line < len(commands); line++ {
+        command := strings.TrimSpace(commands[line]) // Remove espaços em branco
+        if command != "" { // Ignora comandos vazios
+            // Executa o comando e verifica se ocorreu erro dizendo qual comando falhou
+            if result := db.Exec(command); result.Error != nil {
+                logger.Errorf("Error executing SQL command number: %d: %v", line ,result.Error)
+                return result.Error
+            }
+        }
     }
     return nil
 }
