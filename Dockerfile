@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # setting app port
-EXPOSE ${APP_PORT}
+EXPOSE 8080
 
 # building the application using entry point for make a executable main
 RUN go build -o main cmd/main.go

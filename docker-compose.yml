@@ -1,24 +1,22 @@
-version: '3.8'
-
 services:
   crud_app:
     container_name: crud_app
     image: "crud_app:latest"
     build: .
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+      - "8080:8080"
     depends_on:
-      - ${DB_HOST}
+      - postgres_db
 
   postgres_db:
     image: postgres:13
-    container_name: ${DB_HOST}
+    container_name: postgres_db
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: restaurante_db
     ports:
-      - "${DB_PORT}:${DB_PORT}" 
+      - "5432:5432" 
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
