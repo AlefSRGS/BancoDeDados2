@@ -1,13 +1,22 @@
 services:
-  db:
+  crud_app:
+    container_name: crud_app
+    image: "crud_app:latest"
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres_db
+
+  postgres_db:
     image: postgres:13
     container_name: postgres_db
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: restaurante_db
     ports:
-      - "5432:5432"
+      - "5432:5432" 
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
