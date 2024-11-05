@@ -1,6 +1,7 @@
 # Define variables
 DOCKER_COMPOSE = sudo docker compose
 DOCKER = sudo docker
+POSTGRES_VERSION = 13
 
 # Targets
 .PHONY: up down restart logs db-shell
@@ -14,6 +15,7 @@ down:
 	$(DOCKER_COMPOSE) down
 	$(DOCKER) image prune -f
 	$(DOCKER) rmi crud_app
+	$(DOCKER) rmi postgres:$(POSTGRES_VERSION)
 
 # Restart services
 restart: down up
