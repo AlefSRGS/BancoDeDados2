@@ -1,13 +1,19 @@
 package config
 
 import (
-	"io"
 	"os"
-	"strings"
 
 	"github.com/vinicius457/BancoDeDados2/internal/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+)
+
+var(
+    host = "postgres_db"
+    port = "5432"
+    user = "postgres"
+    password = "postgres"
+    dbname = "restaurante"
 )
 
 func ConnectPostgresql() (*gorm.DB, error) {
@@ -22,11 +28,11 @@ func ConnectPostgresql() (*gorm.DB, error) {
 	// 	errDotEnv :=  errors.New("Missing environment variables for database connection")
     //     logger.Warnf("postgresql connection warning: %v", errDotEnv)
     //     logger.Info("Initializing default database connection...")
-        host := "postgres_db"
-        port := "5432"
-        user := "postgres"
-        password := "postgres"
-        dbname := "restaurante"
+        // host := "postgres_db"
+        // port := "5432"
+        // user := "postgres"
+        // password := "postgres"
+        // dbname := "restaurante"
     //}
 	dsn := "host=" + host + " port=" + port + " user=" + user + " password=" + password + " dbname=" + dbname + " sslmode=disable"
     db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -51,32 +57,19 @@ func ConnectPostgresql() (*gorm.DB, error) {
 }
 
 func initDatabase(db *gorm.DB) error {
+    sqlFile := "config/Restaurante.sql"
 
-    sqlFile, err := os.Open("Restaurante.sql")
-    if err != nil {
-        logger.Errorf("Error opening SQL file for init database: %v", err)
-		return err
-    }
-    defer sqlFile.Close()
-
-    sqlBytes, err := io.ReadAll(sqlFile)
+    sqlBytes, err := os.ReadFile(sqlFile)
     if err != nil {
         logger.Errorf("Error reading SQL file for init database: %v", err)
         return err
     }
-
-    // Separa os comandos SQL
-    commands := strings.Split(string(sqlBytes), ";")
-
-    for line := 0; line < len(commands); line++ {
-        command := strings.TrimSpace(commands[line]) // Remove espaços em branco
-        if command != "" { // Ignora comandos vazios
-            // Executa o comando e verifica se ocorreu erro dizendo qual comando falhou
-            if result := db.Exec(command); result.Error != nil {
-                logger.Errorf("Error executing SQL command number: %d: %v", line ,result.Error)
-                return result.Error
-            }
-        }
+    
+    // Executa o comando e verifica se ocorreu erro dizendo qual comando falhou
+    commands := string(sqlBytes)
+    if result := db.Exec(commands); result.Error != nil {
+        logger.Errorf("Error executing SQL command: %v",result.Error)
+        return result.Error
     }
     return nil
 }
