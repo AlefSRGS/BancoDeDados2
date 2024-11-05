@@ -2,7 +2,7 @@
 FROM golang:1.23.2
 
 # setting working directory in docker container
-WORKDIR /app
+WORKDIR /go/src/app
 
 # copying the source code to working directory
 COPY . .
