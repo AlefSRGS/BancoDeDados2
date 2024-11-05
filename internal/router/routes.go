@@ -16,5 +16,6 @@ func initRoutes(router *gin.Engine){
 	// usos := router.Group("/usos")
 	// venda := router.Group("/venda")
 	//router.GET("/checkdb",handler)
-	router.GET("/hello", handler.HelloCRUD)
+	//router.GET("/hello", handler.HelloCRUD)
+	router.GET("/ping", handler.Ping)
 }

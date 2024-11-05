@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"net/http"
+	//"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/vinicius457/BancoDeDados2/config"
@@ -18,8 +18,8 @@ func InitializingHandlers() {
     db = config.GetDbConnection()
 }
 
-func HelloCRUD(ctx *gin.Context){
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "Hello-CRUD",
+func Ping(ctx *gin.Context) {
+	ctx.JSON(200, gin.H{
+		"message": "pong",
 	})
 }
