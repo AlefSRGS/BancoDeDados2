@@ -49,8 +49,8 @@ func ConnectPostgresql() (*gorm.DB, error) {
 
     err = initDatabase(db)
     if err!= nil {
-        logger.Errorf("Error initializing database: %v", err)
-        return nil, err
+        logger.Warnf("Warning... something wrong with initializing database: %v", err)
+        //return nil, err
     }
 
 	return db, nil
@@ -64,7 +64,7 @@ func initDatabase(db *gorm.DB) error {
         logger.Errorf("Error reading SQL file for init database: %v", err)
         return err
     }
-    
+
     // Executa o comando e verifica se ocorreu erro dizendo qual comando falhou
     commands := string(sqlBytes)
     if result := db.Exec(commands); result.Error != nil {
