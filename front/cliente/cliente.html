@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes</title>
+    <link rel="stylesheet" href="./styles cliente.css">
+</head>
+<body>
+    <header>
+        <h1>Clientes</h1>
+        <nav>
+            <a href="/front/index.html">Voltar</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Adicionar Cliente</h2>
+            <form id="cliente-form">
+                <label for="cliente-nome">Nome:</label>
+                <input type="text" id="cliente-nome" required><br>
+                <label for="cliente-sexo">Sexo:</label>
+                <select id="cliente-sexo">
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                    <option value="o">Outro</option>
+                </select><br>
+                <label for="cliente-idade">Idade:</label>
+                <input type="number" id="cliente-idade" required><br>
+                <label for="cliente-nascimento">Data de Nascimento:</label>
+                <input type="date" id="cliente-nascimento" required><br>
+                <button type="button" onclick="adicionarCliente()">Adicionar Cliente</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Listar Clientes</h2>
+            <button onclick="listarClientes()">Listar Todos os Clientes</button>
+            <div id="lista-clientes"></div>
+        </section>
+        
+        <section>
+            <h2>Pesquisar Cliente por ID</h2>
+            <input type="text" id="cliente-id-pesquisar" placeholder="Digite o ID do Cliente">
+            <button onclick="pesquisarCliente()">Pesquisar</button>
+            <div id="cliente-detalhes"></div>
+        </section>
+        
+        <section>
+            <h2>Atualizar Cliente</h2>
+            <form id="cliente-update-form">
+                <input type="text" id="cliente-id-atualizar" placeholder="ID do Cliente" required><br>
+                <input type="text" id="cliente-nome-atualizar" placeholder="Novo Nome"><br>
+                <button type="button" onclick="atualizarCliente()">Atualizar Cliente</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Remover Cliente</h2>
+            <input type="text" id="cliente-id-remover" placeholder="ID do Cliente">
+            <button onclick="removerCliente()">Remover Cliente</button>
+        </section>
+    </main>
+    
+    <script src="cliente.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Vendas</title>
+    <link rel="stylesheet" href="./styles venda.css">
+</head>
+<body>
+    <header>
+        <h1>Vendas</h1>
+        <nav>
+            <a href="/front/index.html">Voltar</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Adicionar Venda</h2>
+            <form id="Venda-form">
+                <label for="Venda-nome">Nome:</label>
+                <input type="text" id="Venda-nome" required><br>
+                <button type="button" onclick="adicionarVenda()">Adicionar Venda</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Listar Vendas</h2>
+            <button onclick="listarVendas()">Listar Todos as Vendas</button>
+            <div id="lista-Vendas"></div>
+        </section>
+        
+        <section>
+            <h2>Pesquisar Venda por ID</h2>
+            <input type="text" id="Venda-id-pesquisar" placeholder="Digite o ID da Venda">
+            <button onclick="pesquisarVenda()">Pesquisar</button>
+            <div id="Venda-detalhes"></div>
+        </section>
+        
+        <section>
+            <h2>Atualizar Venda</h2>
+            <form id="Venda-update-form">
+                <input type="text" id="Venda-id-atualizar" placeholder="ID do Venda" required><br>
+                <input type="text" id="Venda-nome-atualizar" placeholder="Novo Nome"><br>
+                <button type="button" onclick="atualizarVenda()">Atualizar Venda</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Remover Venda</h2>
+            <input type="text" id="Venda-id-remover" placeholder="ID do Venda">
+            <button onclick="removerVenda()">Remover Venda</button>
+        </section>
+    </main>
+    
+    <script src="venda.js"></script>
+</body>
+</html>

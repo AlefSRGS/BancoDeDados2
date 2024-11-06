@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de fornecedors</title>
+    <link rel="stylesheet" href="./styles fornecedor.css">
+</head>
+<body>
+    <header>
+        <h1>Fornecedores</h1>
+        <nav>
+            <a href="/front/index.html">Voltar</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Adicionar Fornecedor</h2>
+            <form id="fornecedor-form">
+                <label for="fornecedor-nome">Nome:</label>
+                <input type="text" id="fornecedor-nome" required><br>
+                <label for="fornecedor-sexo">Sexo:</label>
+                <select id="fornecedor-sexo">
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                    <option value="o">Outro</option>
+                </select><br>
+                <label for="fornecedor">Idade:</label>
+                <input type="number" id="fornecedor" required><br>
+                <label for="fornecedor-nascimento">Data de Nascimento:</label>
+                <input type="date" id="fornecedor-nascimento" required><br>
+                <button type="button" onclick="adicionarfornecedor()">Adicionar fornecedor</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Listar Fornecedores</h2>
+            <button onclick="listarfornecedores()">Listar Todos os fornecedors</button>
+            <div id="lista-fornecedores"></div>
+        </section>
+        
+        <section>
+            <h2>Pesquisar Fornecedor por ID</h2>
+            <input type="text" id="Fornecedor-id-pesquisar" placeholder="Digite o ID do fornecedor">
+            <button onclick="pesquisarFornecedor()">Pesquisar</button>
+            <div id="Fornecedor-detalhes"></div>
+        </section>
+        
+        <section>
+            <h2>Atualizar Fornecedor</h2>
+            <form id="Fornecedor-update-form">
+                <input type="text" id="Fornecedor-id-atualizar" placeholder="ID do Fornecedor" required><br>
+                <input type="text" id="Fornecedor-nome-atualizar" placeholder="Novo Nome"><br>
+                <button type="button" onclick="atualizarFornecedor()">Atualizar fornecedor</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Remover Fornecedor</h2>
+            <input type="text" id="fornecedor-id-remover" placeholder="ID do fornecedor">
+            <button onclick="removerfornecedor()">Remover Fornecedor</button>
+        </section>
+    </main>
+    
+    <script src="fornecedor.js"></script>
+</body>
+</html>
