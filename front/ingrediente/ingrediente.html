@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Ingredientes</title>
+    <link rel="stylesheet" href="./styles ingrediente.css">
+</head>
+<body>
+    <header>
+        <h1>ingredientes</h1>
+        <nav>
+            <a href="/front/index.html">Voltar</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Adicionar Ingrediente</h2>
+            <form id="Ingrediente-form">
+                <label for="Ingrediente-nome">Nome:</label>
+                <input type="text" id="Ingrediente-nome" required><br>
+                <label for="Ingrediente-Quantidade">Quantidade:</label>
+                <input type="number" id="Ingrediente-Quantidade" required><br>
+                <button type="button" onclick="adicionarIngrediente()">Adicionar Ingredientes</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Listar Ingredientes</h2>
+            <button onclick="listarIngredientes()">Listar Todos os Ingredientes</button>
+            <div id="lista-Ingredientes"></div>
+        </section>
+        
+        <section>
+            <h2>Pesquisar Ingrediente por ID</h2>
+            <input type="text" id="Ingrediente-id-pesquisar" placeholder="Digite o ID do Ingrediente">
+            <button onclick="pesquisarIngrediente()">Pesquisar</button>
+            <div id="Ingrediente-detalhes"></div>
+        </section>
+        
+        <section>
+            <h2>Atualizar Ingrediente</h2>
+            <form id="Ingrediente-update-form">
+                <input type="text" id="Ingrediente-id-atualizar" placeholder="ID do Ingrediente" required><br>
+                <input type="text" id="Ingrediente-nome-atualizar" placeholder="Novo Nome"><br>
+                <button type="button" onclick="atualizarIngrediente()">Atualizar Ingrediente</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Remover Ingrediente</h2>
+            <input type="text" id="Ingrediente-id-remover" placeholder="ID do Ingrediente">
+            <button onclick="removerIngrediente()">Remover Ingrediente</button>
+        </section>
+    </main>
+    
+    <script src="ingrediente.js"></script>
+</body>
+</html>
