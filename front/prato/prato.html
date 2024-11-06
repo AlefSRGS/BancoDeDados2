@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Pratos</title>
+    <link rel="stylesheet" href="./styles prato.css">
+</head>
+<body>
+    <header>
+        <h1>Pratos</h1>
+        <nav>
+            <a href="/front/index.html">Voltar</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Adicionar Prato</h2>
+            <form id="prato-form">
+                <label for="prato-nome">Nome:</label>
+                <input type="text" id="prato-nome" required><br>
+                <label for="prato-Quantidade">Quantidade:</label>
+                <input type="number" id="prato-Quantidade" required><br>
+                <button type="button" onclick="adicionarprato()">Adicionar Pratos</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Listar Pratos</h2>
+            <button onclick="listarpratos()">Listar Todos os Pratos</button>
+            <div id="lista-pratos"></div>
+        </section>
+        
+        <section>
+            <h2>Pesquisar Prato por ID</h2>
+            <input type="text" id="prato-id-pesquisar" placeholder="Digite o ID do Prato">
+            <button onclick="pesquisarprato()">Pesquisar</button>
+            <div id="prato-detalhes"></div>
+        </section>
+        
+        <section>
+            <h2>Atualizar Prato</h2>
+            <form id="prato-update-form">
+                <input type="text" id="prato-id-atualizar" placeholder="ID do Prato" required><br>
+                <input type="text" id="prato-nome-atualizar" placeholder="Novo Nome"><br>
+                <button type="button" onclick="atualizarprato()">Atualizar Prato</button>
+            </form>
+        </section>
+        
+        <section>
+            <h2>Remover Prato</h2>
+            <input type="text" id="prato-id-remover" placeholder="ID do Prato">
+            <button onclick="removerprato()">Remover Prato</button>
+        </section>
+    </main>
+    
+    <script src="prato.js"></script>
+</body>
+</html>
