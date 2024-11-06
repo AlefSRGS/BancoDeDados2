@@ -3,7 +3,7 @@ package config
 import (
 	"os"
 
-	"github.com/vinicius457/BancoDeDados2/internal/model"
+	//"github.com/vinicius457/BancoDeDados2/internal/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -13,7 +13,7 @@ var(
     port = "5432"
     user = "postgres"
     password = "postgres"
-    dbname = "restaurante"
+    dbname = "restaurante_db"
 )
 
 func ConnectPostgresql() (*gorm.DB, error) {
@@ -41,11 +41,11 @@ func ConnectPostgresql() (*gorm.DB, error) {
         return nil, err
     }
 
-	err = db.AutoMigrate(&model.Cliente{}, &model.Fornecedor{}, &model.Ingrediente{}, &model.Prato{}, &model.Venda{}, &model.Usos{})
-	if err!= nil {
-        logger.Errorf("postgresql migration error: %v", err)
-        return nil, err
-    }
+	// err = db.AutoMigrate(&model.Cliente{}, &model.Fornecedor{}, &model.Ingrediente{}, &model.Prato{}, &model.Venda{}, &model.Usos{})
+	// if err!= nil {
+    //     logger.Errorf("postgresql migration error: %v", err)
+    //     return nil, err
+    // }
 
     err = initDatabase(db)
     if err!= nil {
@@ -57,8 +57,26 @@ func ConnectPostgresql() (*gorm.DB, error) {
 }
 
 func initDatabase(db *gorm.DB) error {
-    sqlFile := "config/Restaurante.sql"
+    var sqlFiles []string
+    sqlFiles = append(sqlFiles,"internal/migrations/create_tables.sql")
+    sqlFiles = append(sqlFiles,"internal/migrations/create_functions.sql")
+    sqlFiles = append(sqlFiles,"internal/migrations/create_procedures.sql")
+    sqlFiles = append(sqlFiles,"internal/migrations/create_views.sql")
+    sqlFiles = append(sqlFiles,"internal/migrations/create_users_db.sql")
+    sqlFiles = append(sqlFiles,"internal/migrations/create_triggers.sql")
+    sqlFiles = append(sqlFiles,"internal/migrations/inserts_tables.sql")
 
+    for _, sqlFile := range sqlFiles {
+        err := execSqlScripts(sqlFile, db)
+        if err != nil {
+            return err
+        }
+    }
+
+    return nil
+}
+
+func execSqlScripts(sqlFile string, db *gorm.DB) error{
     sqlBytes, err := os.ReadFile(sqlFile)
     if err != nil {
         logger.Errorf("Error reading SQL file for init database: %v", err)

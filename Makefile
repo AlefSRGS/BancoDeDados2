@@ -19,6 +19,7 @@ down:
 	$(DOCKER_W) image prune -f
 	$(DOCKER_W) rmi crud_app
 	$(DOCKER_W) rmi postgres:$(POSTGRES_VERSION)
+	$(DOCKER_W) volume rm bancodedados2_postgres_data
 
 # Restart services
 restart: down up
@@ -40,6 +41,7 @@ downl:
 	$(DOCKER) image prune -f
 	$(DOCKER) rmi crud_app
 	$(DOCKER) rmi postgres:$(POSTGRES_VERSION)
+	$(DOCKER) volume rm bancodedados2_postgres_data
 
 restartl: downl upl
 
