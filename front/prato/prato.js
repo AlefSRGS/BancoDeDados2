@@ -1,7 +1,7 @@
 async function listarpratos() {
     try {
         const response = await fetch('http://localhost:8080/prato');
-        if (!response.ok) throw new Error('Erro ao listar pratos');
+        if (!response.ok) throw new Error('Erro ao listar Pratos');
 
         const pratos = await response.json();
         const output = document.getElementById('data-output');
@@ -14,13 +14,13 @@ async function listarpratos() {
         });
     } catch (error) {
         console.error(error);
-        alert('Erro ao listar pratos');
+        alert('Erro ao listar Pratos');
     }
 }
 
 async function adicionarprato() {
-    const nome = prompt('Digite o nome do prato:');
-    const quantidade = prompt('Digite a quantidade do prato:');
+    const nome = prompt('Digite o nome do Prato:');
+    const quantidade = prompt('Digite a quantidade do Prato:');
 
     try {
         const response = await fetch('http://localhost:8080/prato/create', {
@@ -31,31 +31,31 @@ async function adicionarprato() {
             body: JSON.stringify({ nome, quantidade })
         });
         
-        if (!response.ok) throw new Error('Erro ao adicionar prato');
+        if (!response.ok) throw new Error('Erro ao adicionar Prato');
         
-        alert('prato adicionado com sucesso');
+        alert('Prato adicionado com sucesso');
         listarpratos();
     } catch (error) {
         console.error(error);
-        alert('Erro ao adicionar prato');
+        alert('Erro ao adicionar Prato');
     }
 }
 
 async function removerprato() {
-    const id = prompt('Digite o ID do prato a ser removido:');
+    const id = prompt('Digite o ID do Prato a ser removido:');
     
     try {
         const response = await fetch(`http://localhost:8080/prato/delete/${id}`, {
             method: 'DELETE'
         });
         
-        if (!response.ok) throw new Error('Erro ao remover prato');
+        if (!response.ok) throw new Error('Erro ao remover Prato');
         
-        alert('prato removido com sucesso');
+        alert('Prato removido com sucesso');
         listarpratos();
     } catch (error) {
         console.error(error);
-        alert('Erro ao remover prato');
+        alert('Erro ao remover Prato');
     }
 }
 
