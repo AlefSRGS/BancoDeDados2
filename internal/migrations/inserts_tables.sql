@@ -1,4 +1,4 @@
-INSERT INTO cliente (nome, sexo, idade, nascimento) VALUES -- Inserções de Clientes (10 registros)
+INSERT INTO cliente (nome, sexo, idade, nascimento) VALUES 
 ('João', 'm', 30, '1994-02-15'),
 ('Maria', 'f', 25, '1999-10-22'),
 ('Carlos', 'm', 35, '1989-06-10'),
@@ -10,7 +10,7 @@ INSERT INTO cliente (nome, sexo, idade, nascimento) VALUES -- Inserções de Cli
 ('Lucas', 'm', 29, '1995-12-08'),
 ('Sofia', 'f', 27, '1997-07-15');
 
-INSERT INTO prato (nome, descricao, valor) VALUES -- Inserções de Pratos (10 registros)
+INSERT INTO prato (nome, descricao, valor) VALUES 
 ('Pizza Margherita', 'Queijo, tomate e manjericão', 35.00),
 ('Lasanha', 'Massa, queijo e molho de carne', 45.00),
 ('Salada Caesar', 'Alface, croutons, frango e molho Caesar', 25.00),
@@ -22,7 +22,7 @@ INSERT INTO prato (nome, descricao, valor) VALUES -- Inserções de Pratos (10 r
 ('Risoto de Camarão', 'Arroz com camarão e temperos', 55.00),
 ('Torta de Limão', 'Sobremesa doce de limão', 15.00);
 
-INSERT INTO fornecedor (nome, estado_origem) VALUES -- Inserções de Fornecedores (10 registros)
+INSERT INTO fornecedor (nome, estado_origem) VALUES 
 ('Fornecedor A', 'SP'),
 ('Fornecedor B', 'RJ'),
 ('Fornecedor C', 'MG'),
@@ -34,7 +34,7 @@ INSERT INTO fornecedor (nome, estado_origem) VALUES -- Inserções de Fornecedor
 ('Fornecedor I', 'GO'),
 ('Fornecedor J', 'ES');
 
-INSERT INTO ingrediente (nome, data_fabricacao, data_validade, quantidade, observacao) VALUES -- Inserções de Ingredientes (10 registros)
+INSERT INTO ingrediente (nome, data_fabricacao, data_validade, quantidade, observacao) VALUES 
 ('Tomate', '2024-01-01', '2024-03-01', 100, 'Fresco'),
 ('Alface', '2024-02-01', '2024-04-01', 50, 'Orgânico'),
 ('Queijo', '2024-01-15', '2024-03-15', 200, 'Mussarela'),
@@ -46,7 +46,7 @@ INSERT INTO ingrediente (nome, data_fabricacao, data_validade, quantidade, obser
 ('Limão', '2024-02-01', '2024-04-01', 120, 'Taiti'),
 ('Farinha', '2024-01-10', '2024-05-10', 250, 'De trigo');
 
-INSERT INTO venda (id_cliente, id_prato, quantidade, dia, hora, valor) VALUES -- Inserção inicial na tabela venda (A SE DISCUTIR)
+INSERT INTO venda (id_cliente, id_prato, quantidade, dia, hora, valor) VALUES 
 (1, 1, 2, '2024-03-01', '12:30:00', 70.00),
 (2, 2, 1, '2024-03-02', '13:15:00', 45.00),
 (3, 3, 3, '2024-03-03', '14:00:00', 75.00),
