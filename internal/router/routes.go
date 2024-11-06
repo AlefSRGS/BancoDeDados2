@@ -13,9 +13,6 @@ func initRoutes(router *gin.Engine){
 	// fornecedor := router.Group("/fornecedor")
 	// ingrediente := router.Group("/ingrediente")
 	// prato := router.Group("/prato")
-	// usos := router.Group("/usos")
 	// venda := router.Group("/venda")
-	//router.GET("/checkdb",handler)
-	//router.GET("/hello", handler.HelloCRUD)
 	router.GET("/ping", handler.Ping)
 }

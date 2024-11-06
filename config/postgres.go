@@ -3,7 +3,8 @@ package config
 import (
 	"os"
 
-	//"github.com/vinicius457/BancoDeDados2/internal/model"
+	"github.com/vinicius457/BancoDeDados2/internal/model"
+	"github.com/vinicius457/BancoDeDados2/internal/repository"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -41,11 +42,11 @@ func ConnectPostgresql() (*gorm.DB, error) {
         return nil, err
     }
 
-	// err = db.AutoMigrate(&model.Cliente{}, &model.Fornecedor{}, &model.Ingrediente{}, &model.Prato{}, &model.Venda{}, &model.Usos{})
-	// if err!= nil {
-    //     logger.Errorf("postgresql migration error: %v", err)
-    //     return nil, err
-    // }
+	err = db.AutoMigrate(&model.Cliente{}, &model.Fornecedor{}, &model.Ingrediente{}, &model.Prato{}, &model.Venda{}, &model.Usos{})
+	if err!= nil {
+        logger.Errorf("postgresql migration error: %v", err)
+        return nil, err
+    }
 
     err = initDatabase(db)
     if err!= nil {
@@ -58,13 +59,13 @@ func ConnectPostgresql() (*gorm.DB, error) {
 
 func initDatabase(db *gorm.DB) error {
     var sqlFiles []string
-    sqlFiles = append(sqlFiles,"internal/migrations/create_tables.sql")
+    //sqlFiles = append(sqlFiles,"internal/migrations/create_tables.sql")
     sqlFiles = append(sqlFiles,"internal/migrations/create_functions.sql")
     sqlFiles = append(sqlFiles,"internal/migrations/create_procedures.sql")
     sqlFiles = append(sqlFiles,"internal/migrations/create_views.sql")
     sqlFiles = append(sqlFiles,"internal/migrations/create_users_db.sql")
     sqlFiles = append(sqlFiles,"internal/migrations/create_triggers.sql")
-    sqlFiles = append(sqlFiles,"internal/migrations/inserts_tables.sql")
+    //sqlFiles = append(sqlFiles,"internal/migrations/inserts_tables.sql")
 
     for _, sqlFile := range sqlFiles {
         err := execSqlScripts(sqlFile, db)
@@ -73,6 +74,26 @@ func initDatabase(db *gorm.DB) error {
         }
     }
 
+    err := repository.InsertClientes(db)
+    if err != nil {
+        logger.Warnf("Error with insert in cliente table: %v", err)
+    }
+    err = repository.InsertFornecedores(db)
+    if err != nil {
+        logger.Warnf("Error with insert in fornecedor table: %v", err)
+    }
+    err = repository.InsertIngredientes(db)
+    if err != nil {
+        logger.Warnf("Error with insert in ingrediente table: %v", err)
+    }
+    err = repository.InsertPratos(db)
+    if err != nil {
+        logger.Warnf("Error with insert in prato table: %v", err)
+    }
+    err = repository.InsertVendas(db)
+    if err != nil {
+        logger.Warnf("Error with insert in venda table: %v", err)
+    }
     return nil
 }
 
@@ -83,7 +104,6 @@ func execSqlScripts(sqlFile string, db *gorm.DB) error{
         return err
     }
 
-    // Executa o comando e verifica se ocorreu erro dizendo qual comando falhou
     commands := string(sqlBytes)
     if result := db.Exec(commands); result.Error != nil {
         logger.Errorf("Error executing SQL command: %v",result.Error)
