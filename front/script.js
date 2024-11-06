@@ -2,6 +2,7 @@
 document.getElementById('cliente-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Evita o envio padrão do formulário
 
+    const urlAddress = 'http://localhost:8080/cliente/create';
     const name = document.getElementById('cliente-name').value;
     const sexo = document.getElementById('cliente-sexo').value;
     const idade = parseInt(document.getElementById('cliente-idade').value);
@@ -9,7 +10,7 @@ document.getElementById('cliente-form').addEventListener('submit', async functio
 
     try {
         // Enviar dados para o endpoint da API
-        const response = await fetch('http://localhost:8080/cliente/create', {
+        const response = await fetch(urlAddress, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
