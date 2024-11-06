@@ -1,7 +1,3 @@
--- Procedimentos
-
--- Procedimento 1: Reajustar valores de pratos
-
 CREATE OR REPLACE PROCEDURE reajuste(percentual NUMERIC)
 LANGUAGE plpgsql
 AS $$
@@ -10,8 +6,6 @@ BEGIN
     SET valor = valor + (valor * percentual / 100);
 END;
 $$;
-
--- Procedimento 2: Sortear cliente para premiação
 
 CREATE OR REPLACE PROCEDURE sorteio_cliente()
 LANGUAGE plpgsql
@@ -30,13 +24,11 @@ BEGIN
 END;
 $$;
 
--- Procedimento 3: Exibir estatísticas de vendas
-
 CREATE OR REPLACE PROCEDURE estatisticas_vendas()
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- Produto mais vendido
+
     SELECT prato.nome AS produto_mais_vendido, COUNT(venda.id_prato) AS total_vendas
     FROM venda
     JOIN prato ON venda.id_prato = prato.id
@@ -44,7 +36,7 @@ BEGIN
     ORDER BY total_vendas DESC
     LIMIT 1;
 
-    -- Produto menos vendido
+    
     SELECT prato.nome AS produto_menos_vendido, COUNT(venda.id_prato) AS total_vendas
     FROM venda
     JOIN prato ON venda.id_prato = prato.id
