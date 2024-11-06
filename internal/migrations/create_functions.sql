@@ -1,7 +1,3 @@
--- Funções
-
--- Função para cálculo de pontos
-
 CREATE OR REPLACE FUNCTION calcula_pontos(valor NUMERIC) RETURNS INT AS $$
 BEGIN
     RETURN FLOOR(valor / 10);
