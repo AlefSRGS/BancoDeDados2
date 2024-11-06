@@ -11,7 +11,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION atualiza_quantidade_ingrediente() RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE ingredientes
+    UPDATE ingrediente
     SET quantidade = quantidade - NEW.quantidade
     WHERE id IN (SELECT id_ingrediente FROM usos WHERE id_prato = NEW.id_prato);
     RETURN NEW;

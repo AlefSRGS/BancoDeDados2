@@ -10,7 +10,7 @@ EXECUTE FUNCTION calcula_pontos();
 -- Trigger 2: Atualizar disponibilidade de pratos com ingredientes vencidos
 
 CREATE TRIGGER trigger_atualiza_disponibilidade_prato
-AFTER UPDATE ON ingredientes
+AFTER UPDATE ON ingrediente
 FOR EACH ROW
 EXECUTE FUNCTION atualiza_disponibilidade_prato();
 

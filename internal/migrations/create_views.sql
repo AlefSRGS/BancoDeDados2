@@ -19,5 +19,5 @@ WHERE pontos > 0;
 
 CREATE VIEW ingredientes_proximos_vencimento AS
 SELECT nome, data_validade
-FROM ingredientes
+FROM ingrediente
 WHERE data_validade < CURRENT_DATE + INTERVAL '7 days';

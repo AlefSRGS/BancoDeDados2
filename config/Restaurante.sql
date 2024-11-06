@@ -1,52 +1,52 @@
--- CREATE TABLE IF NOT EXISTS cliente ( -- Tabela cliente
---     id SERIAL PRIMARY KEY,
---     nome VARCHAR(100),
---     sexo CHAR(1) CHECK (sexo IN ('m', 'f', 'o')),
---     idade INT,
---     nascimento DATE,
---     pontos INT DEFAULT 0
--- );
+CREATE TABLE IF NOT EXISTS cliente ( -- Tabela cliente
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    sexo CHAR(1) CHECK (sexo IN ('m', 'f', 'o')),
+    idade INT,
+    nascimento DATE,
+    pontos INT DEFAULT 0
+);
 
--- CREATE TABLE IF NOT EXISTS prato ( -- Tabela prato
---     id SERIAL PRIMARY KEY,
---     nome VARCHAR(100),
---     descricao TEXT,
---     valor NUMERIC(10, 2),
---     disponibilidade BOOLEAN DEFAULT TRUE
--- );
+CREATE TABLE IF NOT EXISTS prato ( -- Tabela prato
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    descricao TEXT,
+    valor NUMERIC(10, 2),
+    disponibilidade BOOLEAN DEFAULT TRUE
+);
 
--- CREATE TABLE IF NOT EXISTS fornecedor ( -- Tabela fornecedor
---     id SERIAL PRIMARY KEY,
---     nome VARCHAR(100),
---     estado_origem CHAR(2) CHECK (estado_origem IN ('AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'))
--- );
+CREATE TABLE IF NOT EXISTS fornecedor ( -- Tabela fornecedor
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    estado_origem CHAR(2) CHECK (estado_origem IN ('AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'))
+);
 
--- CREATE TABLE IF NOT EXISTS ingrediente ( -- Tabela ingredientes
---     id SERIAL PRIMARY KEY,
---     nome VARCHAR(100),
---     data_fabricacao DATE,
---     data_validade DATE,
---     quantidade INT,
---     observacao TEXT
--- );
+CREATE TABLE IF NOT EXISTS ingrediente ( -- Tabela ingredientes
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    data_fabricacao DATE,
+    data_validade DATE,
+    quantidade INT,
+    observacao TEXT
+);
 
--- CREATE TABLE IF NOT EXISTS usos ( -- Tabela usos (relaciona prato com seus ingrediente)
---     id_prato INT,
---     id_ingrediente INT,
---     PRIMARY KEY (id_prato, id_ingrediente),
---     FOREIGN KEY (id_prato) REFERENCES prato(id),
---     FOREIGN KEY (id_ingrediente) REFERENCES ingredientes(id)
--- );
+CREATE TABLE IF NOT EXISTS usos ( -- Tabela usos (relaciona prato com seus ingrediente)
+    id_prato INT,
+    id_ingrediente INT,
+    PRIMARY KEY (id_prato, id_ingrediente),
+    FOREIGN KEY (id_prato) REFERENCES prato(id),
+    FOREIGN KEY (id_ingrediente) REFERENCES ingrediente(id)
+);
 
--- CREATE TABLE IF NOT EXISTS venda ( -- Tabela venda
---     id SERIAL PRIMARY KEY,
---     id_cliente INT REFERENCES cliente(id),
---     id_prato INT REFERENCES prato(id),
---     quantidade INT,
---     dia DATE,
---     hora TIME,
---     valor NUMERIC(10, 2)
--- );
+CREATE TABLE IF NOT EXISTS venda ( -- Tabela venda
+    id SERIAL PRIMARY KEY,
+    id_cliente INT REFERENCES cliente(id),
+    id_prato INT REFERENCES prato(id),
+    quantidade INT,
+    dia DATE,
+    hora TIME,
+    valor NUMERIC(10, 2)
+);
 
 INSERT INTO cliente (nome, sexo, idade, nascimento) VALUES -- Inserções de Clientes (10 registros)
 ('João', 'm', 30, '1994-02-15'),
@@ -84,7 +84,7 @@ INSERT INTO fornecedor (nome, estado_origem) VALUES -- Inserções de Fornecedor
 ('Fornecedor I', 'GO'),
 ('Fornecedor J', 'ES');
 
-INSERT INTO ingredientes (nome, data_fabricacao, data_validade, quantidade, observacao) VALUES -- Inserções de Ingredientes (10 registros)
+INSERT INTO ingrediente (nome, data_fabricacao, data_validade, quantidade, observacao) VALUES -- Inserções de Ingredientes (10 registros)
 ('Tomate', '2024-01-01', '2024-03-01', 100, 'Fresco'),
 ('Alface', '2024-02-01', '2024-04-01', 50, 'Orgânico'),
 ('Queijo', '2024-01-15', '2024-03-15', 200, 'Mussarela'),
@@ -140,7 +140,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trigger_atualiza_disponibilidade_prato
-AFTER UPDATE ON ingredientes
+AFTER UPDATE ON ingrediente
 FOR EACH ROW
 EXECUTE FUNCTION atualiza_disponibilidade_prato();
 
@@ -164,7 +164,7 @@ EXECUTE FUNCTION impedir_compra_prato_indisponivel();
 
 CREATE OR REPLACE FUNCTION atualiza_quantidade_ingrediente() RETURNS TRIGGER AS $$
 BEGIN
-    UPDATE ingredientes
+    UPDATE ingrediente
     SET quantidade = quantidade - NEW.quantidade
     WHERE id IN (SELECT id_ingrediente FROM usos WHERE id_prato = NEW.id_prato);
     RETURN NEW;
@@ -245,7 +245,7 @@ $$ LANGUAGE plpgsql;
 -- Usuários e permissões
 
 CREATE USER admin WITH PASSWORD 'admin_admin'; -- Cria um "admin" com a senha "admin_admin"
-GRANT ALL PRIVILEGES ON DATABASE restaurante TO admin; -- Concede ao usuário "admin" todos os privilégios no banco de dados "restaurante"
+GRANT ALL PRIVILEGES ON DATABASE restaurante_db TO admin; -- Concede ao usuário "admin" todos os privilégios no banco de dados "restaurante_db"
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin; -- Concede ao usuário "admin" todos os privilégios em todas as tabelas no esquema "public"
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO admin; -- Concede ao usuário "admin" todos os privilégios em todas as sequências no esquema "public"
 
@@ -278,5 +278,5 @@ WHERE pontos > 0;
 
 CREATE VIEW ingredientes_proximos_vencimento AS
 SELECT nome, data_validade
-FROM ingredientes
+FROM ingrediente
 WHERE data_validade < CURRENT_DATE + INTERVAL '7 days';

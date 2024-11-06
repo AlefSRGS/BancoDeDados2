@@ -1,7 +1,7 @@
 -- Usuários e permissões
 
 CREATE USER admin WITH PASSWORD 'admin_admin'; -- Cria um "admin" com a senha "admin_admin"
-GRANT ALL PRIVILEGES ON DATABASE restaurante TO admin; -- Concede ao usuário "admin" todos os privilégios no banco de dados "restaurante"
+GRANT ALL PRIVILEGES ON DATABASE restaurante_db TO admin; -- Concede ao usuário "admin" todos os privilégios no banco de dados "restaurante_db"
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin; -- Concede ao usuário "admin" todos os privilégios em todas as tabelas no esquema "public"
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO admin; -- Concede ao usuário "admin" todos os privilégios em todas as sequências no esquema "public"
 
