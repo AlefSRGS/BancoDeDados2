@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS cliente ( -- Tabela cliente
+CREATE TABLE IF NOT EXISTS cliente ( 
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100),
     sexo CHAR(1) CHECK (sexo IN ('m', 'f', 'o')),
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS cliente ( -- Tabela cliente
     pontos INT DEFAULT 0
 );
 
-CREATE TABLE IF NOT EXISTS prato ( -- Tabela prato
+CREATE TABLE IF NOT EXISTS prato ( 
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100),
     descricao TEXT,
@@ -15,13 +15,13 @@ CREATE TABLE IF NOT EXISTS prato ( -- Tabela prato
     disponibilidade BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE IF NOT EXISTS fornecedor ( -- Tabela fornecedor
+CREATE TABLE IF NOT EXISTS fornecedor ( 
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100),
     estado_origem CHAR(2) CHECK (estado_origem IN ('AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'))
 );
 
-CREATE TABLE IF NOT EXISTS ingrediente ( -- Tabela ingredientes
+CREATE TABLE IF NOT EXISTS ingrediente ( 
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100),
     data_fabricacao DATE,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS ingrediente ( -- Tabela ingredientes
     observacao TEXT
 );
 
-CREATE TABLE IF NOT EXISTS usos ( -- Tabela usos (relaciona prato com seus ingrediente)
+CREATE TABLE IF NOT EXISTS usos ( 
     id_prato INT,
     id_ingrediente INT,
     PRIMARY KEY (id_prato, id_ingrediente),
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS usos ( -- Tabela usos (relaciona prato com seus ingre
     FOREIGN KEY (id_ingrediente) REFERENCES ingrediente(id)
 );
 
-CREATE TABLE IF NOT EXISTS venda ( -- Tabela venda
+CREATE TABLE IF NOT EXISTS venda ( 
     id SERIAL PRIMARY KEY,
     id_cliente INT REFERENCES cliente(id),
     id_prato INT REFERENCES prato(id),
