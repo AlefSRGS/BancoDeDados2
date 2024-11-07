@@ -8,7 +8,6 @@ import (
 
 type Cliente struct {
     gorm.Model
-    ID         uint      `gorm:"primaryKey" json:"id"`
     Nome       string    `gorm:"type:varchar(100)" json:"nome"`
     Sexo       string    `gorm:"type:char(1);check:sexo IN ('m', 'f', 'o')" json:"sexo"`
     Idade      int       `json:"idade"`

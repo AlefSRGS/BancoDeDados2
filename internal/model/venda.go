@@ -8,7 +8,7 @@ import (
 
 type Venda struct {
     gorm.Model
-    IDCliente   uint      `gorm:"not null;foreignKey:IDCliente" json:"id_cliente"`
+    IDCliente   uint      `gorm:"not null;foreignKey:IDCliente" json:"id_cliente"` 
     Cliente     Cliente   `gorm:"foreignKey:IDCliente" json:"cliente"`
     
     IDPrato     uint      `gorm:"not null;foreignKey:IDPrato" json:"id_prato"`
